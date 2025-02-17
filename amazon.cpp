@@ -10,6 +10,8 @@
 #include "product_parser.h"
 #include "util.h"
 
+#include "mydatastore.h"
+
 using namespace std;
 struct ProdNameSorter {
     bool operator()(Product* p1, Product* p2) {
@@ -29,7 +31,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
+    MyDataStore ds;
 
 
 
@@ -99,10 +101,106 @@ int main(int argc, char* argv[])
                 }
                 done = true;
             }
+
 	    /* Add support for other commands here */
 
+            else if(cmd == "ADD")
+            {
 
+                string username;
 
+                string hit_result_index;
+
+                if(ss >> username)
+                {
+
+                    if(ss >> hit_result_index)
+                    {
+
+                        bool succeeded = ds.addToCart(username, std::stoi(hit_result_index), hits);
+
+                        if(!succeeded)
+                        {
+
+                            cout << "Invalid request" << endl;
+
+                        }
+
+                    }
+
+                    else
+                    {
+
+                        cout << "Invalid request" << endl;
+
+                    }
+
+                }
+
+                else
+                {
+
+                    cout << "Invalid request" << endl;
+
+                }
+                
+            }
+
+            else if(cmd == "VIEWCART")
+            {
+
+                string username;
+
+                if(ss >> username)
+                {
+
+                    bool succeeded = ds.viewCart(username);
+
+                    if(!succeeded)
+                    {
+
+                        cout << "Invalid username" << endl;
+
+                    }
+
+                }
+
+                else
+                {
+
+                    cout << "Invalid Request." << endl;
+
+                }
+
+            }
+
+            else if(cmd == "BUYCART")
+            {
+
+                string username;
+
+                if(ss >> username)
+                {
+
+                    bool succeeded = ds.buyCart(username);
+
+                    if(!succeeded)
+                    {
+
+                        cout << "Invalid username" << endl;
+
+                    }
+
+                }
+
+                else
+                {
+
+                    cout << "Invalid request." << endl;
+
+                }
+
+            }
 
             else {
                 cout << "Unknown command" << endl;

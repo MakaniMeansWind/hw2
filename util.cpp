@@ -13,19 +13,87 @@ std::string convToLower(std::string src)
 
 /** Complete the code to convert a string containing a rawWord
     to a set of words based on the criteria given in the assignment **/
+    
 std::set<std::string> parseStringToWords(string rawWords)
 {
 
+    std::set<std::string> stringSetResult;
 
+    std::string result = "";
 
+    int startingSize = rawWords.size();
 
+    int iterations = 0;
 
+    while(iterations < startingSize)
+    {
 
+        result = "";
 
+        while(!ispunct(rawWords[iterations]) && !isspace(rawWords[iterations]) && iterations < startingSize)
+        {
 
+            result += rawWords[iterations];
 
+            iterations++;
 
+        }
+
+        iterations++;
+
+        // std::string rawWordsSub = rawWords.substr(iterations);
+
+        // rawWords = rawWordsSub;
+
+        if(result.size() >= 2)
+        {
+            
+            std::string returnString = convToLower(result);
+
+            stringSetResult.insert(returnString);
+
+            // cout << "Return String is: " << returnString << endl;
+    
+        }
+        
+    }
+    
+    return stringSetResult;
+    
+    
 }
+
+// void printExamples(std::set<std::string> stringSet)
+// {
+    
+//     std::set<std::string>::iterator it;
+    
+//     for(it = stringSet.begin(); it != stringSet.end(); ++it)
+//     {
+        
+//         cout << "String is: " << *it << endl;
+        
+//     }
+    
+// }
+
+// int main()
+// {
+    
+//     std:: string exampleOne = "Hello world!";
+    
+//     std::set<std::string> setOne = parseStringToWords(exampleOne);
+    
+//     printExamples(setOne);
+    
+//     std:: string exampleTwo = "I'll go out hello world. J. Men's";
+    
+//     std::set<std:: string> setTwo = parseStringToWords(exampleTwo);
+    
+//     printExamples(setTwo);
+    
+// }
+    
 
 /**************************************************
  * COMPLETED - You may use the following functions
